@@ -114,47 +114,57 @@ public class RobotCube implements GLEventListener, KeyListener {
     }
 
     private void drawRobot(GL2 gl) {
-        // Thân
-        drawCube(gl, 0.8f, 0.8f, 0.8f, 2f, 3f, 1f);
+        // Thân (hình hộp chữ nhật đứng, tỉ lệ hợp lý)
+        drawCube(gl, 0.85f, 0.85f, 0.85f, 1.5f, 2.5f, 0.8f);
 
-        // Đầu
+        // Cổ (nhỏ, cao vừa phải)
         gl.glPushMatrix();
-        gl.glTranslatef(0f, 3.5f, 0f);
-        drawCube(gl, 0.6f, 0.6f, 0.6f, 1f, 1f, 1f);
+        gl.glTranslatef(0f, 1.5f, 0f); // Đặt cổ lên trên thân
+        drawCube(gl, 0.7f, 0.7f, 0.7f, 0.4f, 0.5f, 0.4f);
         gl.glPopMatrix();
 
-        // Tay trái
+        // Đầu (nhỏ hơn thân)
         gl.glPushMatrix();
-        gl.glTranslatef(-1.5f, 2.0f, 0f);
-        drawCube(gl, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 0.5f); // vai
-        gl.glTranslatef(0f, -1.0f, 0f);
-        drawCube(gl, 0.4f, 0.4f, 0.4f, 0.5f, 1f, 0.5f); // tay dưới
+        gl.glTranslatef(0f, 2.2f, 0f); // Đặt đầu lên trên cổ
+        drawCube(gl, 0.6f, 0.6f, 0.6f, 0.8f, 0.8f, 0.8f);
         gl.glPopMatrix();
 
-        // Tay phải (có điều khiển)
+        // Tay trái (vai to, cánh tay và cẳng tay nhỏ dần)
         gl.glPushMatrix();
-        gl.glTranslatef(1.5f, 2.0f, 0f);
-        gl.glRotatef(armRightRotateZ, 0f, 0f, 1f);
-        gl.glRotatef(armRightAngleZ, 0f, 0f, 1f);
-        drawCube(gl, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 0.5f); // vai
-        gl.glTranslatef(0f, -1.0f, 0f);
-        drawCube(gl, 0.4f, 0.4f, 0.4f, 0.5f, 1f, 0.5f); // tay dưới
+        gl.glTranslatef(-1.1f, 1.0f, 0f); // Vai trái
+        drawCube(gl, 0.5f, 0.5f, 0.5f, 0.4f, 0.6f, 0.4f); // Vai
+        gl.glTranslatef(0f, -0.7f, 0f); // Cánh tay trên
+        drawCube(gl, 0.45f, 0.45f, 0.45f, 0.35f, 0.8f, 0.35f);
+        gl.glTranslatef(0f, -0.9f, 0f); // Cẳng tay
+        drawCube(gl, 0.4f, 0.4f, 0.4f, 0.3f, 0.7f, 0.3f);
         gl.glPopMatrix();
 
-        // Chân trái
+        // Tay phải (điều khiển được)
         gl.glPushMatrix();
-        gl.glTranslatef(-0.6f, -2.5f, 0f);
-        drawCube(gl, 0.6f, 0.6f, 0.6f, 0.5f, 1f, 0.5f); // đùi
-        gl.glTranslatef(0f, -1.0f, 0f);
-        drawCube(gl, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 0.5f); // chân dưới
+        gl.glTranslatef(1.1f, 1.0f, 0f); // Vai phải
+        gl.glRotatef(armRightAngleZ, 0f, 0f, 1f); // Xoay cánh tay quanh vai
+        drawCube(gl, 0.5f, 0.5f, 0.5f, 0.4f, 0.6f, 0.4f); // Vai
+        gl.glTranslatef(0f, -0.7f, 0f); // Cánh tay trên
+        drawCube(gl, 0.45f, 0.45f, 0.45f, 0.35f, 0.8f, 0.35f);
+        gl.glTranslatef(0f, -0.9f, 0f); // Đến khuỷu tay
+        gl.glRotatef(armRightRotateZ, 0f, 0f, 1f); // Xoay cẳng tay quanh khuỷu
+        drawCube(gl, 0.4f, 0.4f, 0.4f, 0.3f, 0.7f, 0.3f); // Cẳng tay
+        gl.glPopMatrix();
+
+        // Chân trái (đùi và cẳng chân tỉ lệ hợp lý)
+        gl.glPushMatrix();
+        gl.glTranslatef(-0.5f, -1.5f, 0f); // Đùi trái
+        drawCube(gl, 0.6f, 0.6f, 0.6f, 0.4f, 0.9f, 0.4f);
+        gl.glTranslatef(0f, -1.0f, 0f); // Cẳng chân trái
+        drawCube(gl, 0.5f, 0.5f, 0.5f, 0.35f, 0.8f, 0.35f);
         gl.glPopMatrix();
 
         // Chân phải
         gl.glPushMatrix();
-        gl.glTranslatef(0.6f, -2.5f, 0f);
-        drawCube(gl, 0.6f, 0.6f, 0.6f, 0.5f, 1f, 0.5f); // đùi
-        gl.glTranslatef(0f, -1.0f, 0f);
-        drawCube(gl, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 0.5f); // chân dưới
+        gl.glTranslatef(0.5f, -1.5f, 0f); // Đùi phải
+        drawCube(gl, 0.6f, 0.6f, 0.6f, 0.4f, 0.9f, 0.4f);
+        gl.glTranslatef(0f, -1.0f, 0f); // Cẳng chân phải
+        drawCube(gl, 0.5f, 0.5f, 0.5f, 0.35f, 0.8f, 0.35f);
         gl.glPopMatrix();
     }
 
@@ -195,10 +205,10 @@ public class RobotCube implements GLEventListener, KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         switch (e.getKeyChar()) {
-            case 'p': armRightAngleZ += 5f; break;
-            case 'h': armRightAngleZ -= 5f; break;
-            case 'a': armRightRotateZ += 5f; break;
-            case 'b': armRightRotateZ -= 5f; break;
+            case 'p': armRightAngleZ += 1f; break; // nâng cánh tay phải
+            case 'h': armRightAngleZ -= 1f; break; // hạ cánh tay phải
+            case 'a': armRightRotateZ += 1f; break; // quay cẳng tay phải lên
+            case 'b': armRightRotateZ -= 1f; break; // quay cẳng tay phải xuống
         }
     }
 
